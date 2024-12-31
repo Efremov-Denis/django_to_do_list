@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Task Detail</title>
+</head>
+<body>
+    <h1>Task Detail</h1>
+    <p>Title: {{ task.title }}</p>
+    <p>Description: {{ task.description }}</p>
+    <p>Completed: {{ task.completed }}</p>
+    <p>Created_at: {{ task.created_at }}</p>
+
+    <!-- Link to Update Task -->
+    <a href="{% url 'task_update' pk=task.pk %}">Update Task</a>
+</body>
+</html>
