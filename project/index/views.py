@@ -1,7 +1,9 @@
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Task
+from .forms import TaskForm  # Импортируем вашу форму
 
 class TaskListView(ListView):
     model = Task
@@ -11,7 +13,7 @@ class TaskListView(ListView):
 class TaskCreateView(CreateView):
     model = Task
     template_name = 'task_create.html'
-    fields = ['title', 'description']
+    form_class = TaskForm  # Используем TaskForm вместо fields
     success_url = reverse_lazy('task_list') # Укажите url на который перенаправить после создания задачи
 
 class TaskDetailView(DetailView):
@@ -28,3 +30,7 @@ class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'task_delete.html'
     success_url = reverse_lazy('task_list')
+
+def task_list(request):
+    tasks = Task.objects.all()
+    return render(request, 'index/task_list.html', {'tasks': tasks})
