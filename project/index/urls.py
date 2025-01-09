@@ -6,5 +6,5 @@ urlpatterns = [
     path('create/', views.TaskCreateView.as_view(), name='task_create'),
     path('task/<int:pk>/', views.TaskDetailView.as_view(), name='task_detail'),
     path('index/<int:pk>/update/', views.TaskUpdateView.as_view(), name='task_update'),  # URL для обновления задачи
-    path('index/<int:pk>/delete/', views.TaskDeleteView.as_view(), name='task_delete'),  # URL для удаления задачи
+    path('task/<int:pk>/delete/', views.TaskDeleteView.as_view(), name='task_delete'),
 ]

@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Delete Task</title>
+    <title>Подтверждение удаления задачи</title>
 </head>
 <body>
-    <h1>Delete Task</h1>
-    <p>Are you sure you want to delete the task "{{ task.title }}"?</p>
+    <h1>Удалить задачу "{{ task.title }}"?</h1>
+    <p>Вы уверены, что хотите удалить эту задачу?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, delete</button>
+        <button type="submit">Удалить</button>
+        <a href="{% url 'task_list' %}">Отмена</a>
     </form>
-    <a href="/">Cancel</a>
 </body>
 </html>
