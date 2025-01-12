@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Task
@@ -24,7 +24,10 @@ class TaskDetailView(DetailView):
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'task_update.html'
-    fields = ['title', 'description', 'completed', 'created_at']
+    fields = ['title', 'description', 'completed']
+
+    def get_success_url(self):
+        return reverse('task_detail', kwargs={'pk': self.object.pk})
 
 class TaskDeleteView(DeleteView):
     model = Task

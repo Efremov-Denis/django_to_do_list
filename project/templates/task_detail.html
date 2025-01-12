@@ -10,10 +10,10 @@
     <h1>Описание задачи</h1>
     <p>Имя задачи: {{ task.title }}</p>
     <p>Описание задачи: {{ task.description }}</p>
-    <p>Стадия выполнения: {{ task.completed }}</p>
+        <p>Статус завершения: {% if task.completed %}Завершена{% else %}Не завершена{% endif %}</p>
     <p>Задача поставлена: {{ task.created_at }}</p>
-
     <!-- Link to Update Task -->
-    <a href="{% url 'task_update' pk=task.pk %}">Update Task</a>
+    <a href="{% url 'task_update' pk=task.pk %}">Редактировать задачу</a>
+        <a href="{% url 'task_list' %}">Назад к списку задач</a>
 </body>
 </html>
