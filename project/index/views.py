@@ -24,7 +24,7 @@ class TaskDetailView(DetailView):
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'task_update.html'
-    fields = ['title', 'description', 'completed']
+    form_class = TaskForm  # Используем TaskForm вместо fields
 
     def get_success_url(self):
         return reverse('task_detail', kwargs={'pk': self.object.pk})
