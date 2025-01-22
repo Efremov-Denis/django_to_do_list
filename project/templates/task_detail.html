@@ -10,7 +10,18 @@
     <h1>Описание задачи</h1>
     <p>Имя задачи: {{ task.title }}</p>
     <p>Описание задачи: {{ task.description }}</p>
-        <p>Статус завершения: {% if task.completed %}Завершена{% else %}Не завершена{% endif %}</p>
+    <p>
+        Статус завершения:
+        <span id="status-display">
+        {% if task.completed %}Завершена{% else %}Не завершена{% endif %}
+        </span>
+    </p>
+        <form method="post" action="{% url 'task_toggle_complete' pk=task.pk %}">
+            {% csrf_token %}
+            <button type="submit">
+                {% if task.completed %}Пометить как не завершенную{% else %}Пометить как завершенную{% endif %}
+            </button>
+        </form>
     <p>Задача поставлена: {{ task.created_at }}</p>
     <!-- Link to Update Task -->
     <a href="{% url 'task_update' pk=task.pk %}">Редактировать задачу</a>

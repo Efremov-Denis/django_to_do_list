@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -37,3 +37,9 @@ class TaskDeleteView(DeleteView):
 def task_list(request):
     tasks = Task.objects.all()
     return render(request, 'index/task_list.html', {'tasks': tasks})
+
+def task_toggle_complete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.completed = not task.completed
+    task.save()
+    return redirect('task_detail', pk=pk)
