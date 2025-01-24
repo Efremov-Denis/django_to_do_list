@@ -9,8 +9,12 @@ class TaskForm(forms.ModelForm):
             'description',
             'completed',
         )
+
+        widgets = {
+            'completed': forms.CheckboxInput(attrs={'id': 'completed_checkbox', 'data-initial-value': False}),
+        }
+
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
-        self.fields['title'].label = 'Укажите имя задачи'
-        self.fields['description'].label = 'Опишите вашу задачу'
-        self.fields['completed'].label = 'Статус завершения'
+        if self.instance and self.instance.pk:  # Если это существующая задача
+            self.fields['completed'].widget.attrs['data-initial-value'] = self.instance.completed

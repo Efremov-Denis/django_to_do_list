@@ -5,6 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Список всех задач</title>
+        <style>
+            .complete-button {
+                background-color: yellow;
+            }
+             .reset-button {
+                background-color: lightgreen;
+            }
+        </style>
 </head>
 <body>
     <h1>Список задач</h1>
@@ -19,7 +27,8 @@
                 </form>
                  <form method="post" action="{% url 'task_toggle_complete' pk=task.pk %}" style="display:inline;">
                      {% csrf_token %}
-                    <button type="submit" >{% if task.completed %}Сбросить статус{% else %}Завершить{% endif %}</button>
+                        <button type="submit" class="{% if task.completed %}reset-button{% else %}complete-button{% endif %}">
+                            {% if task.completed %}Задача выполнена{% else %}Задача в работе{% endif %}
                 </form>
             </li>
         {% endfor %}

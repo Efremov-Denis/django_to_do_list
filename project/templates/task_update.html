@@ -5,6 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Страница редактирования задачи</title>
+    <style>
+        .completed-true {
+            background-color: lightgreen; /* Зеленый для "Выполнено" */
+        }
+        .completed-false {
+            background-color: yellow; /* Желтый для "В работе" */
+        }
+    </style>
     </head>
 <body>
         <h1>Редактировать задачу</h1>
@@ -14,5 +22,24 @@
             <button type="submit">Сохранить</button>
     </form>
     <a href="{% url 'task_list' %}">Назад к списку задач</a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkbox = document.getElementById('completed_checkbox');
+            function updateCheckboxColor() {
+                if (checkbox.checked) {
+                    checkbox.parentNode.classList.remove('completed-false');
+                    checkbox.parentNode.classList.add('completed-true');
+                } else {
+                    checkbox.parentNode.classList.remove('completed-true');
+                    checkbox.parentNode.classList.add('completed-false');
+                }
+            }
+            // Установим начальный цвет при загрузке страницы
+            updateCheckboxColor();
+
+            // Обработчик события при изменении состояния флажка
+            checkbox.addEventListener('change', updateCheckboxColor);
+        });
+    </script>
 </body>
 </html>
