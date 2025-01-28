@@ -15,6 +15,9 @@ class TaskForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(TaskForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        self.fields['title'].label = 'Название задачи'
+        self.fields['description'].label = 'Описание задачи'
+        self.fields['completed'].label = 'Завершено'
         if self.instance and self.instance.pk:  # Если это существующая задача
             self.fields['completed'].widget.attrs['data-initial-value'] = self.instance.completed
