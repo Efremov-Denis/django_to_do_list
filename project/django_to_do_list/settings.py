@@ -113,3 +113,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'auth.User'
+
+LOGIN_REDIRECT_URL = 'task_list'  # Перенаправляет пользователя после успешного входа
+LOGOUT_REDIRECT_URL = 'task_list' # Перенаправляет пользователя после успешного выхода

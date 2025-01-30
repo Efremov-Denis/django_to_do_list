@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Список всех задач</title>
+    <title>Главная страница</title>
         <style>
             .complete-button {
                 background-color: yellow;
@@ -15,7 +15,16 @@
         </style>
 </head>
 <body>
-    <h1>Список задач</h1>
+    <h1>Добро пожаловать в моё приложение!</h1>
+    {% if user.is_authenticated %}
+        <p>Привет, {{ user.username }}!
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}  
+            <button type="submit">Выйти</button>
+        </form>
+    {% else %}
+         <p><a href="{% url 'register' %}">Зарегистрироваться</a> | <a href="{% url 'login' %}">Войти</a></p>
+    {% endif %}
     <ul>
         {% for task in tasks %}
             <li>
@@ -29,6 +38,7 @@
                      {% csrf_token %}
                         <button type="submit" class="{% if task.completed %}reset-button{% else %}complete-button{% endif %}">
                             {% if task.completed %}Задача выполнена{% else %}Задача в работе{% endif %}
+                    </button>
                 </form>
             </li>
         {% endfor %}
